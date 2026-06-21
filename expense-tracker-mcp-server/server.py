@@ -1,5 +1,7 @@
 import random
 
+
+import json
 from fastmcp import FastMCP
 import sqlite3
 
@@ -176,6 +178,12 @@ def get_expense_summary(start_date: str = None, end_date: str = None):
     conn.close()
     return summary
 
+@mcp.resource("expense-tracker-mcp-server://categories", mime_type="application/json")
+def get_categories():
+    import os
+    path= os.path.join(os.path.dirname(__file__), "categories.json")
+    with open(path, "r") as f:
+        return json.load(f)
 
 
 
