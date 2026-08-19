@@ -50,7 +50,7 @@ async def main() -> None:
     )
 
     response = await agent.ainvoke(
-        {"messages": [{"role": "user", "content": "do the noisy thing"}]}
+        {"messages": [{"role": "user", "content": "tell me about the weather in London"}]}
     )
     print(response)
 
