@@ -17,7 +17,7 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.interceptors import MCPToolCallRequest
 from langchain_openai import ChatOpenAI
 from rich import print
-
+from langchain.messages import ToolMessage
 load_dotenv()
 
 
@@ -38,6 +38,7 @@ async def inject_user_context(request: MCPToolCallRequest, handler):
     modified_request = modified_request.override(
         headers={"Authorization": f"Bearer {api_key}"}
     )
+    print(f"Injected user_id: {user_id} and Authorization header for tool: {request.name}")
     return await handler(modified_request)
 
 
@@ -65,7 +66,7 @@ async def main() -> None:
 
     # Pass per-user context at invocation time.
     result = await agent.ainvoke(
-        {"messages": [{"role": "user", "content": "Search my orders"}]},
+        {"messages": [{"role": "user", "content": "use tool to get details of naruto"}]},
         context={"user_id": "user_123", "api_key": "sk-demo"},
     )
     print(result)
