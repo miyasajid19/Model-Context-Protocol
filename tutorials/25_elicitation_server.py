@@ -40,4 +40,4 @@ async def create_profile(name: str, ctx: Context) -> str:
 
 
 if __name__ == "__main__":
-    server.run(transport="http")
+    server.run(transport="streamable-http")
