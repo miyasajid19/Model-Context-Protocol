@@ -34,6 +34,14 @@ async def get_character(character: str) -> dict:
         "jutsu": ["Shadow Clone Jutsu", "Rasengan", "Sage Mode"],
     }
 
+@mcp.tool()
+def long_task() -> str:
+    """Simulate a long-running task."""
+    import time
+    print("Starting long task...")
+    time.sleep(10)
+    return "Long task completed"
+
 
 # -------------------------
 # Resources
